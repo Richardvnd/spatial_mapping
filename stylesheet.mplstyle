@@ -1,0 +1,39 @@
+text.usetex         : True
+text.latex.preamble : \usepackage{amsmath}\usepackage{amssymb}\usepackage{siunitx}[=v2]
+
+font.family         : serif
+font.style          : italic
+font.size           : 9.0
+font.serif          : Times New Roman
+
+figure.dpi          : 100
+figure.autolayout   : True
+
+axes.labelsize      : 9
+axes.linewidth      : 0.5
+axes.labelpad       : 3.0 
+axes.titlesize      : 9
+
+xtick.direction     : in
+ytick.direction     : in
+xtick.major.width   : 0.5
+xtick.minor.width   : 0.5
+xtick.major.size    : 2
+xtick.minor.size    : 1
+ytick.major.size    : 2
+ytick.minor.size    : 1
+ytick.major.width   : 0.5
+ytick.minor.width   : 0.5
+
+xtick.labelsize     : 9
+ytick.labelsize     : 9
+
+axes.prop_cycle     : cycler('color', ['440154', '443983', '31688e', '21918c', '35b779', '90d743', 'fde725'])
+
+legend.fontsize     : 8
+legend.frameon      : False
+
+lines.linewidth     : 0.8
+
+savefig.dpi         : 600
+savefig.bbox        : tight
