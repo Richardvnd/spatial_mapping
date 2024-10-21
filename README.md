@@ -1,6 +1,6 @@
 # Spatial Mapping
 
-This repository contains the code used to produce the figures in X. 
+This repository contains the code used to produce the figures in Dyer & Moore (arXiv:2410.13935). 
 
 <div align="center">
   
@@ -14,6 +14,4 @@ This repository contains the code used to produce the figures in X.
 
 To use this code you will need to install [qnmfits](https://github.com/eliotfinch/qnmfits). 
 
-This code uses NR waveforms from the Spectral Einstein Code. CCE waveforms can be obtained from the [SXS Gravitational Waveform Database](https://data.black-holes.org/waveforms/extcce_catalog.html). All simulations were transformed into the superrest frame using the [`scri`](https://pypi.org/project/scri/) package. 
-
-Waveforms are imported into the workbooks using the function `CCE.SXS_CCE()`. This imports a `qnmfits.Custom()` object containing the transformed CCE data. This function is not included in this repo and will need to be replaced with a suitable method for importing the waveform data.  
+This code uses NR waveforms from the Spectral Einstein Code. CCE waveforms can be obtained from the [SXS Gravitational Waveform Database](https://data.black-holes.org/waveforms/extcce_catalog.html). All simulations were transformed into the superrest frame using the [`scri`](https://pypi.org/project/scri/) package. This can be done using the `CCE_extract.py` code. 
