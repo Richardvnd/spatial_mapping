@@ -7,7 +7,7 @@ from scri.asymptotic_bondi_data.map_to_superrest_frame import MT_to_WM
 
 """
 
-This code takes the CCE data and transforms it into the superrest frame. 
+This code takes the CCE data and transforms it into the superrest frame.
 
 """
 
@@ -129,7 +129,9 @@ for lev in levs:
             abd_ringdown = abd.interpolate(np.arange(-100, abd.t[-1], 0.1))
 
             # Map to remnant superrest frame
-            abd_ringdown_superrest, _, _ = abd_ringdown.map_to_superrest_frame(t_0=300, padding_time=20)
+            abd_ringdown_superrest, _, _ = abd_ringdown.map_to_superrest_frame(
+                t_0=300, padding_time=20
+            )
 
             # Get mass and spin from abd objects
             M_f = abd_ringdown_superrest.bondi_rest_mass()[-1]

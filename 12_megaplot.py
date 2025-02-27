@@ -1,15 +1,15 @@
 import numpy as np
-import matplotlib
 import matplotlib.pyplot as plt
 import qnmfits
 import CCE
-from qnmfits.spatial_mapping_functions import *
+import matplotlib.patches as mpatches
+from matplotlib.lines import Line2D
 
 plt.style.use("stylesheet.mplstyle")
 
 """
 
-This code generates a figure illustrating the angle avereaged multimode QNM fit to NR data.
+This code generates a figure illustrating the angle averaged multimode QNM fit to NR data.
 
 """
 
@@ -18,7 +18,13 @@ sim = CCE.SXS_CCE("0013", lev="Lev5", radius="R2")
 ell_max, n_max = 4, 1
 show_fundamental = True
 t0 = 10.0
-modes = [(l, m, n, p) for l in range(2, ell_max + 1) for m in range(-l, l + 1) for n in range(n_max + 1) for p in [-1, 1]]
+modes = [
+    (l, m, n, p)
+    for l in range(2, ell_max + 1)
+    for m in range(-l, l + 1)
+    for n in range(n_max + 1)
+    for p in [-1, 1]
+]
 spherical_modes = [(l, m) for l in range(2, ell_max + 1) for m in range(-l, l + 1)]
 
 best_fit = qnmfits.multimode_ringdown_fit(
@@ -51,9 +57,6 @@ C1 = colors(2)
 C2 = colors2(3)
 C3 = colors(3)
 
-
-import matplotlib.patches as mpatches
-
 C0patch = mpatches.Patch(color=C0, label="NR data")
 C1patch = mpatches.Patch(color=C1, label="QNM model")
 kpatch = mpatches.Patch(color="k", label="Residuals\n(shifted and\nx10 for clarity)")
@@ -73,11 +76,11 @@ else:
         loc="upper right",
     )
 
-from matplotlib.lines import Line2D
-
 line_re = Line2D([0], [0], label="Real part", color=C0, lw=2, ls="-")
 line_im = Line2D([0], [0], label="Imag part", color=C0, lw=2, ls=":")
-axs[0, -1].legend(handles=[line_re, line_im], frameon=False, fontsize=12, loc="lower left")
+axs[0, -1].legend(
+    handles=[line_re, line_im], frameon=False, fontsize=12, loc="lower left"
+)
 
 for ell in np.arange(2, ell_max + 1):
     for m in np.arange(-ell, ell + 1):
@@ -87,19 +90,25 @@ for ell in np.arange(2, ell_max + 1):
         ax.plot(sim.times, sim.h[ell, m].real, c=C0, ls="-", lw=2)
         ax.plot(sim.times, sim.h[ell, m].imag, c=C0, ls=":", lw=2)
 
-        ax.plot(best_fit["model_times"], best_fit["model"][ell, m].real, c=C1, ls="-", lw=2)
-        ax.plot(best_fit["model_times"], best_fit["model"][ell, m].imag, c=C1, ls=":", lw=2)
+        ax.plot(
+            best_fit["model_times"], best_fit["model"][ell, m].real, c=C1, ls="-", lw=2
+        )
+        ax.plot(
+            best_fit["model_times"], best_fit["model"][ell, m].imag, c=C1, ls=":", lw=2
+        )
 
         ax.plot(
             best_fit["model_times"],
-            -y_max + 10 * (best_fit["model"][ell, m].real - best_fit["data"][ell, m].real),
+            -y_max
+            + 10 * (best_fit["model"][ell, m].real - best_fit["data"][ell, m].real),
             c="k",
             ls="-",
             lw=1,
         )
         ax.plot(
             best_fit["model_times"],
-            -y_max + 10 * (best_fit["model"][ell, m].imag - best_fit["data"][ell, m].imag),
+            -y_max
+            + 10 * (best_fit["model"][ell, m].imag - best_fit["data"][ell, m].imag),
             c="k",
             ls=":",
             lw=1,
@@ -120,7 +129,9 @@ for ell in np.arange(2, ell_max + 1):
                 lw=1,
                 label=r"$C_{220+}\mu^{" + str(ell) + str(m) + "}_{220+}$",
             )
-            ax.plot(t, y_max + np.imag(C * np.exp(-1j * om * (t - t0))), c=C2, ls=":", lw=1)
+            ax.plot(
+                t, y_max + np.imag(C * np.exp(-1j * om * (t - t0))), c=C2, ls=":", lw=1
+            )
             ax.legend(
                 frameon=False,
                 fontsize=9,

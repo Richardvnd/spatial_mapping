@@ -28,7 +28,12 @@ lon = np.linspace(-np.pi, np.pi, 200)
 lat = np.linspace(-np.pi / 2, np.pi / 2, 200)
 Lon, Lat = np.meshgrid(lon, lat)
 
-QNMs = [(lam, 2, n, p) for lam in np.arange(2, l_max + 1) for n in np.arange(0, n_max + 1) for p in (-1, +1)]
+QNMs = [
+    (lam, 2, n, p)
+    for lam in np.arange(2, l_max + 1)
+    for n in np.arange(0, n_max + 1)
+    for p in (-1, +1)
+]
 
 spherical_modes = [(l, 2) for l in np.arange(2, l_max + 1)]
 
@@ -91,7 +96,9 @@ def update(step):
 
         if len(times_list) > 4:
             uvsarg = UnivariateSpline(times_list, -np.unwrap(arg_list), k=4, s=0)
-            axs_large[1].plot(times_list, uvsarg.derivative()(times_list), color="black")
+            axs_large[1].plot(
+                times_list, uvsarg.derivative()(times_list), color="black"
+            )
 
         return fig
 
